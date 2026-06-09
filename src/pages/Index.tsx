@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import Icon from "@/components/ui/icon";
 
-const HERO_IMG = "https://cdn.poehali.dev/projects/20c700af-4039-4a14-8864-57cd89f0dac2/files/b5b58d4e-fc38-4a92-a1bb-9d8917bc9700.jpg";
-const ETYMOLOGY_IMG = "https://cdn.poehali.dev/projects/20c700af-4039-4a14-8864-57cd89f0dac2/files/a3b2373f-f298-4b4d-bcdb-e92e9fbc1b29.jpg";
-const MAP_IMG = "https://cdn.poehali.dev/projects/20c700af-4039-4a14-8864-57cd89f0dac2/files/87e95d68-e944-4464-a09c-5ac9a89639bf.jpg";
+const HERO_IMG = "https://cdn.poehali.dev/projects/20c700af-4039-4a14-8864-57cd89f0dac2/files/68d90e4b-307b-47d7-bf7d-c944a57d8c05.jpg";
+const ETYMOLOGY_IMG = "https://cdn.poehali.dev/projects/20c700af-4039-4a14-8864-57cd89f0dac2/files/187bd94f-aa9c-46b4-907a-a8e4aed4a5d3.jpg";
+const GALLERY_IMG3 = "https://cdn.poehali.dev/projects/20c700af-4039-4a14-8864-57cd89f0dac2/files/64c5e9e4-6d8a-4c0f-9d93-70ca1e47ccaf.jpg";
 
 const NAV_ITEMS = [
   { id: "home", label: "Главная" },
@@ -68,12 +68,12 @@ const HISTORY_ITEMS = [
 ];
 
 const GALLERY_ITEMS = [
-  { title: "Картографические символы", desc: "Как обозначали места на старых картах", tag: "Карты", img: HERO_IMG },
-  { title: "Корни слов", desc: "Этимологическое дерево названий", tag: "Этимология", img: ETYMOLOGY_IMG },
-  { title: "Народная топонимика", desc: "Местные названия и их легенды", tag: "Фольклор", img: MAP_IMG },
-  { title: "Водные пути", desc: "Реки как природные дороги и имена", tag: "Реки", img: HERO_IMG },
+  { title: "Картографические символы", desc: "Как обозначали места на старых картах", tag: "Карты", img: ETYMOLOGY_IMG },
+  { title: "Корни слов", desc: "Этимологическое дерево названий", tag: "Этимология", img: GALLERY_IMG3 },
+  { title: "Народная топонимика", desc: "Местные названия и их легенды", tag: "Фольклор", img: HERO_IMG },
+  { title: "Водные пути", desc: "Реки как природные дороги и имена", tag: "Реки", img: GALLERY_IMG3 },
   { title: "Горная топонимика", desc: "Тайны горных имён и перевалов", tag: "Горы", img: ETYMOLOGY_IMG },
-  { title: "Исчезнувшие названия", desc: "Топонимы, стёртые историей", tag: "История", img: MAP_IMG },
+  { title: "Исчезнувшие названия", desc: "Топонимы, стёртые историей", tag: "История", img: HERO_IMG },
 ];
 
 function useScrollReveal() {
@@ -309,20 +309,113 @@ export default function Index() {
           </div>
 
           <div className="section-reveal grid md:grid-cols-3 gap-6 items-start">
+            {/* SVG карта России */}
             <div className="md:col-span-2 relative rounded-2xl overflow-hidden border border-border shadow-xl bg-card">
-              <img src={MAP_IMG} alt="Карта топонимов" className="w-full h-96 object-cover opacity-70" />
-              <div className="absolute inset-0">
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                  {MAP_POINTS.map((p, i) => (
-                    <g key={i}>
-                      <circle cx={p.x} cy={p.y} r="2.5" fill={activeMapPin === i ? "#d4a017" : "#3d6b51"} opacity="0.25" />
-                      <circle cx={p.x} cy={p.y} r="1.2"
-                        className="map-pin" fill={activeMapPin === i ? "#d4a017" : "#3d6b51"}
-                        stroke="white" strokeWidth="0.4"
-                        onClick={() => setActiveMapPin(activeMapPin === i ? null : i)} />
-                    </g>
+              <div className="relative w-full bg-[#e8f0e9]" style={{ paddingBottom: "56%" }}>
+                <svg
+                  className="absolute inset-0 w-full h-full"
+                  viewBox="0 0 1000 560"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  {/* Фон */}
+                  <rect width="1000" height="560" fill="#d4e6d4" rx="12" />
+                  {/* Сетка */}
+                  {[100,200,300,400,500,600,700,800,900].map(x => (
+                    <line key={x} x1={x} y1="0" x2={x} y2="560" stroke="#b8d4b8" strokeWidth="0.5" />
                   ))}
+                  {[100,200,300,400,500].map(y => (
+                    <line key={y} x1="0" y1={y} x2="1000" y2={y} stroke="#b8d4b8" strokeWidth="0.5" />
+                  ))}
+
+                  {/* Упрощённый контур России */}
+                  <path
+                    d="M 60 180 L 90 160 L 130 155 L 170 145 L 200 130 L 230 120 L 260 115 L 300 110 L 340 100 L 380 95 L 420 90 L 460 88 L 500 85 L 540 83 L 580 80 L 620 78 L 660 75 L 700 73 L 740 72 L 780 70 L 820 68 L 860 67 L 900 68 L 940 72 L 970 80 L 980 95 L 975 115 L 965 135 L 960 160 L 955 185 L 950 210 L 940 235 L 930 255 L 920 270 L 910 285 L 900 295 L 890 305 L 880 315 L 870 325 L 860 335 L 850 345 L 840 360 L 830 370 L 820 380 L 810 385 L 800 390 L 790 395 L 780 400 L 770 405 L 760 410 L 750 415 L 740 420 L 730 425 L 720 428 L 710 430 L 700 432 L 690 434 L 680 436 L 670 438 L 660 440 L 650 442 L 640 443 L 630 444 L 620 445 L 610 445 L 600 444 L 590 442 L 580 440 L 570 437 L 560 433 L 550 430 L 540 428 L 530 427 L 520 427 L 510 428 L 500 430 L 490 432 L 480 433 L 470 432 L 460 430 L 450 425 L 440 418 L 430 410 L 420 400 L 410 390 L 400 382 L 390 376 L 380 372 L 370 368 L 360 366 L 350 365 L 340 365 L 330 367 L 320 370 L 310 374 L 300 378 L 290 382 L 280 385 L 270 387 L 260 388 L 250 388 L 240 385 L 230 380 L 220 373 L 210 365 L 200 357 L 190 350 L 180 345 L 170 342 L 160 340 L 150 340 L 140 342 L 130 345 L 120 350 L 110 356 L 100 362 L 90 367 L 80 370 L 70 370 L 60 368 L 50 363 L 45 355 L 42 344 L 42 330 L 44 315 L 47 300 L 50 285 L 52 270 L 54 255 L 55 240 L 56 225 L 57 210 L 58 195 L 60 180 Z"
+                    fill="#3d6b51"
+                    fillOpacity="0.25"
+                    stroke="#3d6b51"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                  />
+
+                  {/* Полуостров Камчатка */}
+                  <path d="M 940 200 L 960 180 L 975 200 L 980 230 L 975 260 L 965 280 L 955 295 L 945 285 L 940 265 L 938 240 L 940 200 Z"
+                    fill="#3d6b51" fillOpacity="0.2" stroke="#3d6b51" strokeWidth="1" />
+
+                  {/* Сахалин */}
+                  <path d="M 900 260 L 908 250 L 915 265 L 918 285 L 915 305 L 908 315 L 900 305 L 897 285 L 900 260 Z"
+                    fill="#3d6b51" fillOpacity="0.2" stroke="#3d6b51" strokeWidth="1" />
+
+                  {/* Крым */}
+                  <path d="M 270 345 L 285 338 L 300 340 L 310 348 L 308 358 L 295 365 L 280 362 L 270 355 L 270 345 Z"
+                    fill="#3d6b51" fillOpacity="0.3" stroke="#3d6b51" strokeWidth="0.8" />
+
+                  {/* Реки (упрощённо) */}
+                  {/* Волга */}
+                  <path d="M 380 160 Q 385 220 375 280 Q 368 330 360 370" stroke="#5a8fa0" strokeWidth="2" fill="none" strokeLinecap="round" />
+                  {/* Обь */}
+                  <path d="M 560 110 Q 565 180 560 250 Q 555 310 545 360" stroke="#5a8fa0" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+                  {/* Лена */}
+                  <path d="M 730 110 Q 740 170 745 230 Q 748 290 740 340" stroke="#5a8fa0" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+                  {/* Енисей */}
+                  <path d="M 640 100 Q 648 165 645 230 Q 642 295 635 345" stroke="#5a8fa0" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+
+                  {/* Байкал */}
+                  <ellipse cx="700" cy="280" rx="12" ry="28" fill="#5a8fa0" fillOpacity="0.5" stroke="#3d6b51" strokeWidth="0.8" transform="rotate(-15 700 280)" />
+
+                  {/* Каспийское море */}
+                  <ellipse cx="395" cy="360" rx="14" ry="30" fill="#5a8fa0" fillOpacity="0.45" stroke="#3d6b51" strokeWidth="0.8" />
+
+                  {/* Уральские горы */}
+                  <path d="M 490 115 Q 492 160 490 205 Q 488 245 485 280" stroke="#8B7355" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="6 4" />
+
+                  {/* Интерактивные точки */}
+                  {MAP_POINTS.map((p, i) => {
+                    const coords: Record<string, [number, number]> = {
+                      "Москва": [330, 240],
+                      "Санкт-Петербург": [268, 178],
+                      "Волга": [378, 295],
+                      "Урал": [490, 215],
+                      "Каспий": [398, 358],
+                      "Киев": [248, 280],
+                    };
+                    const [cx, cy] = coords[p.name] || [500, 280];
+                    const isActive = activeMapPin === i;
+                    return (
+                      <g key={i} onClick={() => setActiveMapPin(activeMapPin === i ? null : i)} style={{ cursor: "pointer" }}>
+                        <circle cx={cx} cy={cy} r="16" fill={isActive ? "#d4a017" : "#3d6b51"} opacity="0.15" />
+                        <circle cx={cx} cy={cy} r="7" fill={isActive ? "#d4a017" : "#3d6b51"} stroke="white" strokeWidth="2" />
+                        <text x={cx + 11} y={cy + 4} fontSize="11" fill="#1a1208" fontWeight="600"
+                          style={{ fontFamily: "'Golos Text', sans-serif", pointerEvents: "none" }}>
+                          {p.name}
+                        </text>
+                      </g>
+                    );
+                  })}
+
+                  {/* Подписи рек */}
+                  <text x="388" y="215" fontSize="9" fill="#3a6080" transform="rotate(-75 388 215)" style={{ fontFamily: "serif" }}>Волга</text>
+                  <text x="572" y="175" fontSize="9" fill="#3a6080" transform="rotate(-85 572 175)" style={{ fontFamily: "serif" }}>Обь</text>
+                  <text x="655" y="155" fontSize="9" fill="#3a6080" transform="rotate(-85 655 155)" style={{ fontFamily: "serif" }}>Енисей</text>
+                  <text x="752" y="150" fontSize="9" fill="#3a6080" transform="rotate(-80 752 150)" style={{ fontFamily: "serif" }}>Лена</text>
+                  <text x="718" y="258" fontSize="8" fill="#3a6080" style={{ fontFamily: "serif" }}>Байкал</text>
+                  <text x="356" y="395" fontSize="8" fill="#3a6080" style={{ fontFamily: "serif" }}>Каспий</text>
+                  <text x="500" y="108" fontSize="8" fill="#7a6045" fontWeight="bold" style={{ fontFamily: "serif" }}>Урал</text>
+
+                  {/* Компас */}
+                  <g transform="translate(940, 420)">
+                    <circle cx="0" cy="0" r="22" fill="white" fillOpacity="0.8" stroke="#3d6b51" strokeWidth="1" />
+                    <polygon points="0,-16 4,0 0,5 -4,0" fill="#3d6b51" />
+                    <polygon points="0,16 4,0 0,-5 -4,0" fill="#aaa" />
+                    <text x="-3" y="-20" fontSize="8" fill="#3d6b51" fontWeight="bold">С</text>
+                  </g>
+
+                  {/* Название */}
+                  <text x="50" y="520" fontSize="11" fill="#3d6b51" fontWeight="600" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    Топонимы России
+                  </text>
                 </svg>
+
+                {/* Попап активной точки */}
                 {activeMapPin !== null && (
                   <div className="absolute bottom-4 left-4 right-4 bg-parchment/95 backdrop-blur-sm rounded-xl p-4 shadow-lg animate-scale-in">
                     <div className="flex items-center gap-3">
